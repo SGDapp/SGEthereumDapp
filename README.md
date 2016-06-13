@@ -1,1 +1,1 @@
-# SGEthereumDapp
+Sg Ethereum Dapp
