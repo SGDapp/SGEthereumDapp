@@ -1,1 +1,1 @@
-Sg Ethereum Dapp
+SG Ethereum Dapp
