@@ -6,8 +6,10 @@ require('angular-ui-router');
 require('ng-upload');
 require('angular-resource');
 require('../contracts/contracts.js');
+require('../loc/login/loc.js');
+require('../loc/buyer/buyer.js');
 require('../commons/services/api.js');
-var app = angular.module('dapp', ['ui.router','ngResource','dapp.apiService','ngUpload','dapp.contracts']);
+var app = angular.module('dapp', ['ui.router','ngResource','dapp.apiService','ngUpload','dapp.contracts','dapp.loc','dapp.loc.buyer']);
 
 
 var lcCtrl=require('../lc/lc');
@@ -47,8 +49,6 @@ app.config(function($stateProvider, $urlRouterProvider) {
             templateUrl: './src/wallet/wallet.html'
         })
 
-
-
         // Multisign PAGE
         .state('multisign', {
             url: '/multisign',
@@ -69,7 +69,8 @@ app.config(function($stateProvider, $urlRouterProvider) {
             url: '/contracts',
             templateUrl: './src/contracts/contracts.html' ,
 	    controller: 'ContractsCtrl'
-         });
+         })
+
 
 });
 
