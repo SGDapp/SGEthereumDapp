@@ -4,20 +4,27 @@ var app = angular.module('dapp.apiService', []);
 app.factory('Api',  function($resource) {
   var baseUrl="/ethereumDapp/";
   return {
-	
-	//users : ['John', 'James', 'Jake'] 
-	payements: {
-		getNodeAAccounts: $resource(baseUrl+'payements/getNodeAAccounts',{},{get:{method:'GET',isArray: true }}),
-		getNodeBAccounts: $resource(baseUrl+'payements/getNodeBAccounts',{},{get:{method:'GET',isArray: true }}),
-		getNodeABalances: $resource(baseUrl+'payements/getNodeABalances',{},{get:{method:'GET',isArray: true }}),
-		getNodeBBalances: $resource(baseUrl+'payements/getNodeBBalances',{},{get:{method:'GET',isArray: true }}),
-		addAssetsToMaster: $resource(baseUrl+'payements/addAssetsToMaster',{},{add:{method:'GET',params:{assetValue:'@assetValue'}}}),
-		transferAssetsFromMaster: $resource(baseUrl+'payements/transferAssetsFromMaster',{},{transfer:{method:'GET',params:{payementsTo:'@payementsTo',assetValue:'@assetValue'}}}),
-		transferAssetsBetweenClients: $resource(baseUrl+'payements/transferAssetsBetweenClients',{},{transfer: {method:'GET',params:{ payementsFrom:'@payementsFrom',payementsTo:'@payementsTo',assetValue:'@assetValue'}}})
-		
-	}
 
-   }
+  	                               payements: {
+  		getNodeAAccounts: $resource(baseUrl+'payements/getNodeAAccounts',{},{get:{method:'GET',isArray: true }}),
+  		getNodeBAccounts: $resource(baseUrl+'payements/getNodeBAccounts',{},{get:{method:'GET',isArray: true }}),
+  		getNodeABalances: $resource(baseUrl+'payements/getNodeABalances',{},{get:{method:'GET',isArray: true }}),
+  		getNodeBBalances: $resource(baseUrl+'payements/getNodeBBalances',{},{get:{method:'GET',isArray: true }}),
+  		addAssetsToMaster: $resource(baseUrl+'payements/addAssetsToMaster',{},{add:{method:'GET',params:{assetValue:'@assetValue'}}}),
+  		transferAssetsFromMaster: $resource(baseUrl+'payements/transferAssetsFromMaster',{},{transfer:{method:'GET',params:{payementsTo:'@payementsTo',assetValue:'@assetValue'}}}),
+  		transferAssetsBetweenClients: $resource(baseUrl+'payements/transferAssetsBetweenClients',{},{transfer: {method:'GET',params:{ payementsFrom:'@payementsFrom',payementsTo:'@payementsTo',assetValue:'@assetValue'}}})
+
+  	},
+    escrow: {
+      setOwners: $resource(baseUrl+'escrow/setOwners',{},{get:{method:'GET' }}),
+      setRequired: $resource(baseUrl+'escrow/setRequired',{},{set:{method:'GET',params:{required:'@required',assetValue:'@assetValue'} }}),
+      clearAccepted: $resource(baseUrl+'escrow/clearAccepted',{},{clear:{method:'GET' }}),
+      transferAssets: $resource(baseUrl+'escrow/transferAssets',{},{transfer:{method:'GET',params:{transferTo:'@transferTo',transferFrom:'@transferFrom',assetValue:'@assetValue'}}}),
+      accept: $resource(baseUrl+'escrow/accept',{},{get:{method:'GET',params:{accepter:'@accepter'}}}),
+      contractData: $resource(baseUrl+'escrow/contractData',{},{get:{method:'GET' }}),
+    }
+
+  }
 
 });
 
@@ -129,20 +136,20 @@ app.service('fileUpload', ['$http', function ($http) {
 app.controller('lcCtrl', ['$scope','$http','fileUpload', lcCtrl]);
 app.controller('ddCtrl', ['$scope','fileUpload', ddCtrl]);
 app.config(function($stateProvider, $urlRouterProvider) {
-    
+
     $urlRouterProvider.otherwise('/wallet');
-    
+
     $stateProvider
-        
+
         // WALLET PAGE
         .state('wallet', {
             url: '/wallet',
             templateUrl: './src/wallet/wallet.html'
         })
-        
-              
-        
-        // Multisign PAGE 
+
+
+
+        // Multisign PAGE
         .state('multisign', {
             url: '/multisign',
             templateUrl: './src/multisign/multisign.html' ,
@@ -163,7 +170,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
             templateUrl: './src/contracts/contracts.html' ,
 	    controller: 'ContractsCtrl'
          });
-        
+
 });
 
 app.controller('homeCtrl', function($scope,$timeout,$http,Api) {
@@ -226,7 +233,7 @@ Api.payements.addAssetsToMaster.add({assetValue:$scope.assetValue}).$promise.the
 
 }
 
-//Transfer Asset from from Master Wallet to a wallet 
+//Transfer Asset from from Master Wallet to a wallet
 $scope.transferAsset = function(){
 Api.payements.transferAssetsFromMaster.transfer({payementsTo:$scope.walletTo,assetValue:$scope.masterAssetValue}).$promise.then(function(data){
 		console.log(data);
@@ -235,7 +242,7 @@ Api.payements.transferAssetsFromMaster.transfer({payementsTo:$scope.walletTo,ass
 });
 }
 
-// Transfer assets between wallets  
+// Transfer assets between wallets
 $scope.transfer =function(){
 
 Api.payements.transferAssetsBetweenClients.transfer({ payementsFrom:$scope.from,payementsTo:$scope.to,assetValue:$scope.value}).$promise.then(function(data){
@@ -250,87 +257,112 @@ Api.payements.transferAssetsBetweenClients.transfer({ payementsFrom:$scope.from,
 
 });
 
-app.controller('multisignCtrl', function($scope) {
+app.controller('multisignCtrl', function($scope,Api) {
 
 $scope.isAlert=true;
-var web3NodeB = new Web3();
-web3NodeB.setProvider(new web3NodeB.providers.HttpProvider('http://localhost:8001')); 
-$scope.nodeB_Accounts=web3NodeB.eth.accounts;
+$scope.buttonVisibility=false;
 
-var nodeBbalances=[];
-for(var i=0;i<$scope.nodeB_Accounts.length;i++){
-	nodeBbalances[i]=web3NodeB.fromWei(web3NodeB.eth.getBalance($scope.nodeB_Accounts[i]), "ether");
-	
-}
-web3NodeB.personal.unlockAccount(web3NodeB.eth.accounts[0],'1234');
-web3NodeB.personal.unlockAccount(web3NodeB.eth.accounts[1],'1234');
-web3NodeB.personal.unlockAccount(web3NodeB.eth.accounts[2],'1234');
+$scope.nodeB_Accounts=[];
+Api.payements.getNodeBAccounts.get().$promise.then(function(data){
+		//console.log(data)
+		$scope.nodeB_Accounts = data;
+	},function(error) {
+                console.log('error', error);
+});
 
-$scope.nodeB_Balances=nodeBbalances;
+$scope.nodeB_Balances=[];
+//get NodeB Balances
+Api.payements.getNodeBBalances.get().$promise.then(function(data){
+		//console.log(data)
+		$scope.nodeB_Balances = data;
+    console.log($scope.nodeB_Balances);
+	},function(error) {
+                console.log('error', error);
+});
+
+
 $scope.senderBalance= $scope.nodeB_Balances[0];
 
-var ABI=[{"constant":true,"inputs":[{"name":"","type":"uint256"}],"name":"owners","outputs":[{"name":"","type":"address"}],"type":"function"},{"constant":false,"inputs":[{"name":"_owner1","type":"address"},{"name":"_owner2","type":"address"},{"name":"_owner3","type":"address"}],"name":"setOwners","outputs":[],"type":"function"},{"constant":true,"inputs":[],"name":"to","outputs":[{"name":"","type":"address"}],"type":"function"},{"constant":true,"inputs":[{"name":"","type":"address"}],"name":"accepted","outputs":[{"name":"","type":"bool"}],"type":"function"},{"constant":false,"inputs":[],"name":"clearAccepted","outputs":[],"type":"function"},{"constant":false,"inputs":[],"name":"clearContract","outputs":[],"type":"function"},{"constant":false,"inputs":[{"name":"_toAddress","type":"address"}],"name":"sendAsset","outputs":[],"type":"function"},{"constant":false,"inputs":[{"name":"_required","type":"uint256"},{"name":"_value","type":"uint256"}],"name":"setRequired","outputs":[],"type":"function"},{"constant":true,"inputs":[],"name":"assetValue","outputs":[{"name":"","type":"uint256"}],"type":"function"},{"constant":true,"inputs":[],"name":"yetNeeded","outputs":[{"name":"","type":"uint256"}],"type":"function"},{"constant":true,"inputs":[],"name":"from","outputs":[{"name":"","type":"address"}],"type":"function"},{"constant":false,"inputs":[{"name":"_accepter","type":"address"}],"name":"approve","outputs":[],"type":"function"},{"anonymous":false,"inputs":[{"indexed":false,"name":"str","type":"string"}],"name":"customLog","type":"event"}];
-var Address="0x89b3c3f8c6a4804e4cf3e43cca68cd512120d185";
-var multisign = web3NodeB.eth.contract(ABI).at(Address);
+Api.escrow.contractData.get().$promise.then(function(data){
+		//console.log(data)
+    //console.log(data);
+    setContractData(data);
+	},function(error) {
+                console.log('error', error);
+});
 
-$scope.ownersAccepted=[];
-$scope.buttonVisibility=false;
-$scope.contractAddress=multisign.address;
-$scope.yetNeeded=multisign.yetNeeded();
-$scope.owner1=multisign.owners();
-$scope.owner2=multisign.owners(1);
-$scope.owner3=multisign.owners(2);
+function setContractData(data){
+  $scope.ownersAccepted=data.ownersAccepted;
+  $scope.contractAddress=data.contractAddress;
+  $scope.yetNeeded=data.yetNeeded;
+  $scope.owner1=data.owner1;
+  $scope.owner2=data.owner2;
+  $scope.owner3=data.owner3;
+  $scope.fromAddress=data.fromAddress;
+  $scope.toAddress=data.toAddress;
+  $scope.yetNeeded=data.yetNeeded;
+  $scope.contractBalance= data.contractBalance;
+  $scope.assetValue= data.assetValue;
+  //console.log($scope.yetNeeded);
+  //console.log($scope.buttonVisibility);
+  if($scope.yetNeeded!="0"){
+  $scope.buttonVisibility=true;
+  }
+  console.log($scope.owner1);
+  if($scope.owner1==0)
+  {
+  //console.log("akdshgf");setOwners
+    //multisign.setOwners(web3NodeB.eth.accounts[0],web3NodeB.eth.accounts[1],web3NodeB.eth.accounts[2],{from:web3NodeB.eth.accounts[0]});
+    Api.escrow.setOwners.get().$promise.then(function(data){
+    		//console.log(data)
+        console.log(data);
+    	},function(error) {
+                    console.log('error', error);
+    });
 
-if($scope.owner1==0)
-{
-//console.log("akdshgf");
-multisign.setOwners(web3NodeB.eth.accounts[0],web3NodeB.eth.accounts[1],web3NodeB.eth.accounts[2],{from:web3NodeB.eth.accounts[0]});
+  }
 }
 
-
-$scope.ownersAccepted[0]=multisign.accepted($scope.nodeB_Accounts[0]);
-$scope.ownersAccepted[1]=multisign.accepted($scope.nodeB_Accounts[1]);
-$scope.ownersAccepted[2]=multisign.accepted($scope.nodeB_Accounts[2]);
-$scope.fromAddress=multisign.from();
-$scope.toAddress=multisign.to();
-$scope.yetNeeded=multisign.yetNeeded();
-$scope.contractBalance= web3NodeB.fromWei(web3NodeB.eth.getBalance(multisign.address), "ether");
-$scope.assetValue= web3NodeB.fromWei(multisign.assetValue(),"ether")
 $scope.needed = {
   name:"1"
 };
-if($scope.yetNeeded!="0"){
-$scope.buttonVisibility=true;
-}
+
+
 
 $scope.transfer =function(){
 
 console.log($scope.from);
-multisign.clearAccepted({from:web3NodeB.eth.accounts[0]});
-var txId=multisign.sendAsset($scope.to,{from: $scope.from,value: web3NodeB.toWei($scope.value, 'ether')});
-$scope.transaction = web3NodeB.eth.getTransaction(txId);
-multisign.setRequired($scope.needed.name,$scope.value,{from: $scope.from});
+  Api.escrow.clearAccepted.get().$promise.then(function(data){
+      //console.log(data)
+      console.log(data);
+    },function(error) {
+                  console.log('error', error);
+  });
+  Api.escrow.transferAssets.get({transferTo:$scope.to,transferFrom:$scope.from,assetValue:$scope.value}).$promise.then(function(data){
+      //console.log(data)
+      console.log(data);
+    },function(error) {
+                  console.log('error', error);
+  });
+  Api.escrow.setRequired.set({required:$scope.needed.name,assetValue:$scope.value}).$promise.then(function(data){
+      //console.log(data)
+      console.log(data);
+    },function(error) {
+                  console.log('error', error);
+  });
+
 }
 
 $scope.accept= function(index){
-console.log(index + ":" + $scope.nodeB_Accounts[index]);
-
-var txId=multisign.approve($scope.nodeB_Accounts[index], {from: web3NodeB.eth.accounts[0]});
-$scope.transaction = web3NodeB.eth.getTransaction(txId);
+  Api.escrow.accept.get({accepter:$scope.nodeB_Accounts[index]}).$promise.then(function(data){
+      //console.log(data)
+      console.log(data);
+    },function(error) {
+                  console.log('error', error);
+  });
 $scope.ownersAccepted[index]=true;
 }
-var event = multisign.customLog();
 
-// watch for changes
-event.watch(function(error, result){
-    // result will contain various information
-    // including the argumets given to the Deposit
-    // call.
-    if (!error)
-        {
-		console.log(result.args.str);
-	}
-});
 
 
 });

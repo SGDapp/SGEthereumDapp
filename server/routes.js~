@@ -18,7 +18,7 @@ web3NodeB.personal.unlockAccount(web3NodeB.eth.accounts[2],'1234',50000);
  
 
 //console.log(web3NodeA.isConnected());
-//console.log(web3NodeB.isConnected());
+
 
 var customTransactionLog = function(message,txId,transaction){
 
