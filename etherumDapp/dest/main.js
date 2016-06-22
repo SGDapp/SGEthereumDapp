@@ -459,12 +459,9 @@ event.watch(function(error, result){
 },{}],6:[function(require,module,exports){
 var app = angular.module('dapp.loc.buyer', ['ui.router']);
 app.controller('buyerCtrl', function($scope,Api) {
-$scope.msg="buyer page";
-	
+$scope.popoverMsg="buyer page";
+	$("[data-toggle=popover]").popover();
 });
-
-
-
 
 },{}],7:[function(require,module,exports){
 var app = angular.module('dapp.loc', ['ui.router']);

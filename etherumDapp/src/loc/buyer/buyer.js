@@ -1,8 +1,5 @@
 var app = angular.module('dapp.loc.buyer', ['ui.router']);
 app.controller('buyerCtrl', function($scope,Api) {
-$scope.msg="buyer page";
-	
+$scope.popoverMsg="buyer page";
+	$("[data-toggle=popover]").popover();
 });
-
-
-
