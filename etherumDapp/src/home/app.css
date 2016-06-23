@@ -82,6 +82,17 @@ width:100%;
   position: absolute;
  left: 0;
  bottom: 0;
- height: 180px;
+ height: 200px;
  width: 100%;
+}
+.disableCircle {
+  height: 70px;
+  width: 70px;
+  text-align: center;
+  line-height: 70px;
+  color: white;
+  border-radius: 35px;
+  border: 2px solid #808080;
+  background: radial-gradient(circle at center, #808080 66.5%, transparent 68%);
+  pointer-events:none;
 }

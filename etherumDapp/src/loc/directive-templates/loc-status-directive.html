@@ -1,0 +1,21 @@
+<div class="row footer">
+  <hr style="background-color: #aaa;border: 0 none;height: 1.5px;" />
+<!--  <div ng-repeat="i in [1,2,3,4,5,6,7,8,9,10]">
+    <div  ng-if="i!=activeCircleNo" class="col-md-1"><div class="circleBlue" tabindex="0" data-toggle="popover" data-trigger="hover" data-container="body" data-placement="top" data-content="{{popoverMsg}}">1</div></div>
+    <div  ng-if="i==activeCircleNo" class="col-md-1"><div class="circleBrown " tabindex="0" data-toggle="popover" data-trigger="hover" data-container="body" data-placement="top" data-content="{{popoverMsg}}">2</div></div>
+  </div>
+-->
+  <h3 class="textAllignCenter"><strong>Letter Of Credit Status</strong></h3><br />
+    <div class="col-md-1"></div>
+    <div class="col-md-1"><div class="{{(activeCircleNo!=1)?'circleBlue':'circleBrown'}}{{(1<=activeCircleNo)?'':' disableCircle'}}" tabindex="0" data-toggle="popover" data-trigger="hover" data-container="body" data-placement="top" data-content="Buyer has requested Issuing bank to issue Letter Of Credit to seller">1</div></div>
+    <div class="col-md-1"><div class="{{(activeCircleNo!=2)?'circleBlue':'circleBrown'}}{{(2<=activeCircleNo)?'':' disableCircle'}}" tabindex="0" data-toggle="popover" data-trigger="hover" data-container="body" data-placement="top" data-content="Issuing bank has issued Letter Of Credit">2</div></div>
+    <div class="col-md-1"><div class="{{(activeCircleNo!=3)?'circleBlue':'circleBrown'}}{{(3<=activeCircleNo)?'':' disableCircle'}}" tabindex="0" data-toggle="popover" data-trigger="hover" data-container="body" data-placement="top" data-content="Advisory Bank has verified and Accepted Letter Of Credit">3</div></div>
+    <div class="col-md-1"><div class="{{(activeCircleNo!=4)?'circleBlue':'circleBrown'}}{{(4<=activeCircleNo)?'':' disableCircle'}}" tabindex="0" data-toggle="popover" data-trigger="hover" data-container="body" data-placement="top" data-content="Seller has dispatched the goods to Shipping Agent">4</div></div>
+    <div class="col-md-1"><div class="{{(activeCircleNo!=5)?'circleBlue':'circleBrown'}}{{(5<=activeCircleNo)?'':' disableCircle'}}" tabindex="0" data-toggle="popover" data-trigger="hover" data-container="body" data-placement="top" data-content="Shipping Agent has uploaded BOL and digitally Signed">5</div></div>
+    <div class="col-md-1"><div class="{{(activeCircleNo!=6)?'circleBlue':'circleBrown'}}{{(6<=activeCircleNo)?'':' disableCircle'}}" tabindex="0" data-toggle="popover" data-trigger="hover" data-container="body" data-placement="top" data-content="Shipping Agent has Dispatched the goods">6</div></div>
+    <div class="col-md-1"><div class="{{(activeCircleNo!=7)?'circleBlue':'circleBrown'}}{{(7<=activeCircleNo)?'':' disableCircle'}}" tabindex="0" data-toggle="popover" data-trigger="hover" data-container="body" data-placement="top" data-content="Shipping agent confitmed that goods have been reached">7</div></div>
+    <div class="col-md-1"><div class="{{(activeCircleNo!=8)?'circleBlue':'circleBrown'}}{{(8<=activeCircleNo)?'':' disableCircle'}}" tabindex="0" data-toggle="popover" data-trigger="hover" data-container="body" data-placement="top" data-content="Buyer Acknowledged that goods have been received">8</div></div>
+    <div class="col-md-1"><div class="{{(activeCircleNo!=9)?'circleBlue':'circleBrown'}}{{(9<=activeCircleNo)?'':' disableCircle'}}" tabindex="0" data-toggle="popover" data-trigger="hover" data-container="body" data-placement="top" data-content="Issuing Bank is waiting for buyer to confirm whether payement can be done to seller" >9</div></div>
+    <div class="col-md-1"><div class="{{(activeCircleNo!=10)?'circleBlue':'circleBrown'}}{{(10<=activeCircleNo)?'':' disableCircle'}}" tabindex="0" data-toggle="popover" data-trigger="hover" data-container="body" data-placement="top" data-content="Buyer made the payement">10</div></div>
+    <div class="col-md-1"></div>
+</div>

@@ -47,20 +47,20 @@ var users ={buyer:"buyer", seller:"seller", advisingBank:"Abank" , IssuingBank:"
 function fadeOut(){
 	$('form').fadeOut(500);
 	$('.wrapper').addClass('form-success');
-	
+
 }
 $scope.login =function(){
 	console.log($scope.username);
 	console.log($scope.password);
-	
-	
-	
+
+
+
 	if($scope.username==users.buyer){
 		fadeOut();
 		window.setTimeout(function() {
             		$state.go('loc.buyer');
-        	}, 2000); 
-		
+        	}, 2000);
+
 	}
 	else if($scope.username==users.seller){
 	fadeOut();
@@ -78,8 +78,18 @@ $scope.login =function(){
 		toastr.warning('Invalid Username Or Password');
 	}
 }
-	
+
 });
+app.directive('locStatus', function() {
+  return {
+    restrict: 'E',
+    scope: {
+      activeCircleNo: '=currentStatus'
+    },
+    link: function (scope, el, attrs) {
+            $("[data-toggle=popover]").popover();
 
-
-
+    },
+    templateUrl: '/src/loc/directive-templates/loc-status-directive.html'
+  };
+});
