@@ -3,31 +3,31 @@
 	<div class="row" style="margin:15px">
 
 		<div class="col-md-3"  >
-				<div class="well" style="padding:20px; background-color:#fff176">
+				<div class="well" style="padding:20px; ">
     					<h2 style="text-align:center">Master Store-SGPM</h2>
 					<div class="panel panel-danger" style="margin-top:50px;margin-bottom:60px">
 					<div class="panel-heading">SG-SGPM</div>
   					<div class="panel-body wrap" >
    					 	{{nodeA_Accounts[2]}} <br />
 						Asset: {{nodeA_Balances[2]}}
-						
+
 
  					</div>
     					</div>
   				</div>
 		</div>
 		<div class="col-md-9 ">
-			<div class="well" style="background-color:#b3e5fc">
+			<div class="well" >
 				<h2 style="text-align:center">Distribution Store</h2>
-				 
-				
-    					
+
+
+
     				   <div class="row">
-					
+
 					<div ng-repeat="address in nodeB_Accounts">
 						<div class="col-md-4 " style="padding:40px">
 							<div class="panel panel-primary ">
-							
+
 								<div ng-if="$index==0" class="panel-heading">SG-China</div>
 								<div ng-if="$index==1" class="panel-heading">SG-India</div>
 								<div ng-if="$index==2" class="panel-heading">SG-America</div>
@@ -36,16 +36,16 @@
  				 				</div>
 							</div>
 						</div>
-						
+
 					</div>
-					
+
 				   </div>
 
   			</div>
 
 		</div>
 	</div>
-	<div class="row well" style="margin:15px;background-color:#69f0ae">
+	<div class="row well" style="margin:15px;">
 		<div class="col-md-4"  style="padding:30px" >
 			<h3>Add Asset To Master Store</h3>
 			<label  >Asset Value:</label>
@@ -56,7 +56,7 @@
 		</div>
 		<div class="col-md-4 "  style="padding:30px" >
 			<h3>Transfer Asset To a Distribution Store</h3>
-			
+
 			<div class="form-group">
 				<label  >Asset Value:</label>
     				<input type="text" class="form-control" ng-model="masterAssetValue" />
@@ -83,11 +83,8 @@
 			</div>
 			<button class="btn btn-default" ng-click="transfer()">Send</button>
 		</div>
-		
-		
+
+
 	</div>
-	
+
 </div>
-
-
-
