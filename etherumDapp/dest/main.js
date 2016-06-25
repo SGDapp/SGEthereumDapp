@@ -459,7 +459,7 @@ event.watch(function(error, result){
 },{}],6:[function(require,module,exports){
 var app = angular.module('dapp.loc.buyer', ['ui.router']);
 app.controller('buyerCtrl', function($scope,Api) {
-$scope.lstatus=7;
+$scope.lstatus=3;
 	$scope.change= function(){
 		$scope.lstatus=$scope.no;
 
@@ -561,6 +561,17 @@ app.directive('locStatus', function() {
 
     },
     templateUrl: '/src/loc/directive-templates/loc-status-directive.html'
+  };
+});
+app.directive('wallet', function() {
+  return {
+    restrict: 'E',
+    scope: {
+      walletOwner: '=walletOwner',
+      accountAddress: '=accountAddress',
+      assetBalance: '=assetBalance'
+    },
+    templateUrl: '/src/loc/directive-templates/wallet-template.html'
   };
 });
 

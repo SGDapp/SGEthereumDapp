@@ -93,3 +93,14 @@ app.directive('locStatus', function() {
     templateUrl: '/src/loc/directive-templates/loc-status-directive.html'
   };
 });
+app.directive('wallet', function() {
+  return {
+    restrict: 'E',
+    scope: {
+      walletOwner: '=walletOwner',
+      accountAddress: '=accountAddress',
+      assetBalance: '=assetBalance'
+    },
+    templateUrl: '/src/loc/directive-templates/wallet-template.html'
+  };
+});
