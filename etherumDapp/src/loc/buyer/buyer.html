@@ -30,8 +30,17 @@
         <div class="col-md-4"></div>
       </div>
       <div class="row well">
-        <div>
+        <div >
           <!--  display message  -->
+          <div ng-if="(lcStatus!=0||lcStatus!=7||lcStatus!=9)">
+            <br />
+            <br />
+            <br /><br />
+            <br /><br />
+            <br />
+            <div class="divCenter textAllignCenter"><h3>{{waitingMessage}}</h3></div>
+            <br /><br /><br /><br /><br /><br /><br /><br />
+          </div>
         </div >
         <div ng-show="lcStatus<=0" >
           <!--   Request to issue lc  -->
