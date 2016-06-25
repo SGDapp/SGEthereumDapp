@@ -1,0 +1,87 @@
+
+
+<div>
+  <h2 class="textAllignCenter">Seller</h2>
+  <hr style="background-color: #aaa;border: 0 none;height: 1.7px;" />
+  <div class="row " style="margin:15px">
+
+    <div class="col-md-8 " >
+      <div class="row well" >
+        <div class="col-md-4"></div>
+        <div class="col-md-4">
+                  
+            <div class="divCenter {{(lcStatus!=3)?'titleBoxBlue':'titleBoxBrown'}}{{(3<=lcStatus)?'':' titleBoxDisabled'}}" >
+              <i class="fa fa-truck" aria-hidden="true"></i>
+            </div> 
+          
+        </div>
+        <div class="col-md-4"></div>
+      </div>
+      <div class="row well">
+        <div>
+          <!--  display message  -->
+        </div >
+        <div ng-show="lcStatus==3">
+          <!--   Request to issue lc  -->
+          <h3 class="textAllignCenter">Dispatch Goods</h3>
+          <br />
+          <div class="reqBoxBlue divCenter" ng-click="dispatchGoods()">
+            <i class="fa fa-truck" aria-hidden="true"></i>
+            Digitally Sign
+            <i ng-show="digitallySign" style="color:black" class="fa fa-key fa-2x" aria-hidden="true"></i>
+
+          </div>
+            <br /><br /><br />  <br /><br /><br />  <br /><br /><br />
+        </div>
+
+        <div ng-show="lcStatus!=3">
+          
+          <br /><br /><br /><br /><br /><br /><br />
+          <h3 class="textAllignCenter">{{message}}</h3>
+          <br />
+          
+            <br /><br /><br />  <br /><br /><br />  <br />
+        </div>
+
+       
+
+      </div>
+    </div>
+    <div class="col-md-4 ">
+      <div class="well">
+
+        <!--  ----------->
+        <wallet wallet-owner="'Seller'" asset-balance="40" account-address="123456789"></wallet>
+
+        <!----------------->
+      </br>
+        <h4 class="textAllignCenter">Contract Details</h4>
+
+        <div class="panel panel-primary" >
+            <div class="panel-body wrap" >
+              <table>
+                <tr>
+                  <td><h5>Issuing Bank:</h5></td>
+                  <td><h5>SG India</h5></td>
+                </tr>
+                <tr>
+                  <td><h5>Advisory Bank:</h5></td>
+                  <td><h5>SG China</h5></td>
+                </tr>
+             </table>
+             <div class="row" style="margin:10px">
+               <div class="col-md-4 ">
+                 <div class="docBoxBlue">LC</div>
+               </div>
+               <div class="col-md-4 ">
+                 <div class="docBoxGrey">BOL</div>
+               </div>
+             </div>
+            </div>
+        </div>
+
+
+    </div>
+  </div>
+</div>
+<loc-status current-status="lcStatus"></loc-status>
