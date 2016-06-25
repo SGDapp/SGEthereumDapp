@@ -4,7 +4,7 @@ app.factory('Api',  function($resource) {
   var baseUrl="/ethereumDapp/";
   return {
 
-  	                               payements: {
+   payements: {
   		getNodeAAccounts: $resource(baseUrl+'payements/getNodeAAccounts',{},{get:{method:'GET',isArray: true }}),
   		getNodeBAccounts: $resource(baseUrl+'payements/getNodeBAccounts',{},{get:{method:'GET',isArray: true }}),
   		getNodeABalances: $resource(baseUrl+'payements/getNodeABalances',{},{get:{method:'GET',isArray: true }}),
