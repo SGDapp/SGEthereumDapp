@@ -15,5 +15,6 @@ else if($scope.lcStatus==10){
 
 $scope.dispatchGoods =function(){
 		$scope.digitallySign=true;
+        
 	}
 });
