@@ -5,10 +5,74 @@
 <div>
   <h2 class="textAllignCenter">Buyer</h2>
   <hr style="background-color: #aaa;border: 0 none;height: 1.7px;" />
-  <div class="row" style="margin:15px">
+  <div class="row " style="margin:15px">
 
-    <div class="col-md-8">
-      <div >
+    <div class="col-md-8 " >
+      <div class="row well" >
+        <div class="col-md-4"></div>
+        <div class="col-md-4">
+          <div class="col-md-4">
+            <div class="{{(lcStatus==0)?'titleBoxBrown':'titleBoxBlue'}}" >
+              <i class="fa fa-file-text" aria-hidden="true"></i>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="{{(lcStatus!=7)?'titleBoxBlue':'titleBoxBrown'}}{{(7<=lcStatus)?'':' titleBoxDisabled'}}" >
+              <i class="fa fa-thumbs-up" aria-hidden="true"></i>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="{{(lcStatus!=9)?'titleBoxBlue':'titleBoxBrown'}}{{(9<=lcStatus)?'':' titleBoxDisabled'}}" >
+              <i class="fa fa-money" aria-hidden="true"></i>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4"></div>
+      </div>
+      <div class="row well">
+        <div>
+          <!--  display message  -->
+        </div >
+        <div ng-show="lcStatus<=0" >
+          <!--   Request to issue lc  -->
+          <h3 class="textAllignCenter">Request to Issue Lc</h3>
+          <br />
+          <div class="reqBoxBlue divCenter" ng-click="requestLC()">
+            <i class="fa fa-file-text" aria-hidden="true"></i>
+            Digitally Sign
+            <i ng-show="digitallySign" style="color:black" class="fa fa-key fa-2x" aria-hidden="true"></i>
+
+          </div>
+            <br /><br /><br />  <br /><br /><br />  <br /><br /><br />
+        </div>
+
+        <div ng-show="lcStatus==7">
+          <!--  goods received     -->
+          <h3 class="textAllignCenter">Goods Received</h3>
+          <br />
+          <div class="reqBoxBlue divCenter" ng-click="goodsReceived()">
+            <i class="fa fa-file-text" aria-hidden="true"></i>
+            Digitally Sign
+            <i ng-show="digitallySign" style="color:black" class="fa fa-key fa-2x" aria-hidden="true"></i>
+
+          </div>
+            <br /><br /><br />  <br /><br /><br />  <br /><br /><br />
+        </div>
+
+        <div ng-show="lcStatus==9">
+          <!--  Make payment   -->
+          <!--  goods received     -->
+          <h3 class="textAllignCenter">Make Payment</h3>
+          <br />
+          <div class="reqBoxBlue divCenter" ng-click="makePayement()">
+            <i class="fa fa-file-text" aria-hidden="true"></i>
+            Digitally Sign
+            <i ng-show="digitallySign" style="color:black" class="fa fa-key fa-2x" aria-hidden="true"></i>
+
+          </div>
+            <br /><br /><br />  <br /><br /><br />  <br /><br /><br />
+        </div>
+
       </div>
     </div>
     <div class="col-md-4 ">
@@ -48,4 +112,4 @@
     </div>
   </div>
 </div>
-<loc-status current-status="lstatus"></loc-status>
+<loc-status current-status="lcStatus"></loc-status>
