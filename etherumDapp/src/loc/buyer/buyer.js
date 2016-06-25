@@ -13,7 +13,6 @@ else{
 $scope.goodsReceived=false;
 	$scope.change= function(){
 		$scope.lstatus=$scope.no;
-
 	}
 	$scope.requestLC =function(){
 		$scope.digitallySign=true;
