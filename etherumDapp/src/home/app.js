@@ -8,8 +8,12 @@ require('angular-resource');
 require('../contracts/contracts.js');
 require('../loc/login/loc.js');
 require('../loc/buyer/buyer.js');
+require('../loc/seller/seller.js');
+require('../loc/abank/advisingBank.js');
+require('../loc/ibank/issuingBank.js');
+require('../loc/sagent/shippingAgent.js');
 require('../commons/services/api.js');
-var app = angular.module('dapp', ['ui.router','ngResource','dapp.apiService','ngUpload','dapp.contracts','dapp.loc','dapp.loc.buyer']);
+var app = angular.module('dapp', ['ui.router','ngResource','dapp.apiService','ngUpload','dapp.contracts','dapp.loc','dapp.loc.buyer','dapp.loc.seller','dapp.loc.abank','dapp.loc.ibank','dapp.loc.sagent']);
 
 
 var lcCtrl=require('../lc/lc');

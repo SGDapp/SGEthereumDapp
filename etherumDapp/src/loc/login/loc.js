@@ -49,6 +49,12 @@ function fadeOut(){
 	$('.wrapper').addClass('form-success');
 
 }
+function goToStateWithTimeout(State){
+  window.setTimeout(function() {
+              $state.go(State);
+        }, 2000);
+
+}
 $scope.login =function(){
 	console.log($scope.username);
 	console.log($scope.password);
@@ -56,23 +62,25 @@ $scope.login =function(){
 
 
 	if($scope.username==users.buyer){
-		fadeOut();
-		window.setTimeout(function() {
-            		$state.go('loc.buyer');
-        	}, 2000);
-
+		 fadeOut();
+		 goToStateWithTimeout('loc.buyer');
 	}
 	else if($scope.username==users.seller){
-	fadeOut();
+	   fadeOut();
+     goToStateWithTimeout('loc.seller');
 	}
 	else if($scope.username==users.advisingBank){
-	fadeOut();
+	   fadeOut();
+  	 goToStateWithTimeout('loc.abank');
+  $state.go('loc.abank');
 	}
 	else if($scope.username==users.IssuingBank){
-	fadeOut();
+	   fadeOut();
+  	 goToStateWithTimeout('loc.ibank');
 	}
 	else if($scope.username==users.shippingAgent){
-	fadeOut();
+	  fadeOut();
+  	goToStateWithTimeout('loc.sagent');
 	}
 	else {
 		toastr.warning('Invalid Username Or Password');
