@@ -79,6 +79,7 @@ $scope.downloadLCPdf =function() {
 
 $scope.issueLC = function () {
     $scope.digitallySign=true;
+    uploadPdf();
 }
 
 $scope.makePaymentPermission =function(){

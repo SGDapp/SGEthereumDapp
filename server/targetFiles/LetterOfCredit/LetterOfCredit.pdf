@@ -8,7 +8,7 @@
 >>
 endobj
 4 0 obj
-<</Length 1432>>
+<</Length 1243>>
 stream
 0.57 w
 0 G
@@ -31,10 +31,9 @@ BT
 18.4 TL
 0 g
 204.09 700.16 Td
-(Issuing Bank:asdasdasdasdasdasda    ) Tj
-T* (asdasdasddas) Tj
-T* (dasdasd) Tj
-T* (asdasdsad) Tj
+(Societe Generale,) Tj
+T* (Bangalore) Tj
+T* (560034) Tj
 ET
 BT
 /F2 16 Tf
@@ -48,10 +47,8 @@ BT
 18.4 TL
 0 g
 204.09 615.12 Td
-(Issuing Bank:asdasdasdasdasdasda    ) Tj
-T* (asdasdasddas) Tj
-T* (dasdasd) Tj
-T* (asdasdsad) Tj
+(Societe Generale) Tj
+T* (Singapore) Tj
 ET
 BT
 /F2 16 Tf
@@ -65,9 +62,9 @@ BT
 18.4 TL
 0 g
 204.09 530.08 Td
-(Issuing Bank:asdasd) Tj
-T* (asdasdas) Tj
-T* (dasda) Tj
+(Sanjeev Hegde) Tj
+T* (blablablal) Tj
+T* (blalb) Tj
 ET
 BT
 /F2 16 Tf
@@ -81,9 +78,9 @@ BT
 18.4 TL
 0 g
 204.09 445.04 Td
-(Issuing Bank:asdasd) Tj
-T* (asdasdas) Tj
-T* (dasda) Tj
+(Akshay) Tj
+T* (asdasd) Tj
+T* (asdasd) Tj
 ET
 BT
 /F2 16 Tf
@@ -98,8 +95,7 @@ BT
 18.4 TL
 0 g
 204.09 360.00 Td
-(Issuing Bank:asdasd) Tj
-T* (asdasdas) Tj
+(Bill OF Lading,Transport Documents) Tj
 ET
 BT
 /F2 16 Tf
@@ -113,7 +109,7 @@ BT
 18.4 TL
 0 g
 204.09 303.31 Td
-(Issuing Bank:asdasd) Tj
+(30/7/2016) Tj
 ET
 BT
 /F2 16 Tf
@@ -128,8 +124,7 @@ BT
 18.4 TL
 0 g
 204.09 246.62 Td
-(Issuing Bank:asdasd) Tj
-T* (asdasdas) Tj
+(1000000) Tj
 ET
 BT
 /F2 16 Tf
@@ -143,8 +138,7 @@ BT
 18.4 TL
 0 g
 204.09 189.92 Td
-(Issuing Bank:asdasd) Tj
-T* (asdasdas) Tj
+(None) Tj
 ET
 endstream
 endobj
@@ -244,7 +238,7 @@ endobj
 18 0 obj
 <<
 /Producer (jsPDF 1.2.60-git 2016-02-29T18:46:jameshall)
-/CreationDate (D:20160626185049+05'30')
+/CreationDate (D:20160626203037+05'30')
 >>
 endobj
 19 0 obj
@@ -258,25 +252,25 @@ endobj
 xref
 0 20
 0000000000 65535 f 
-0000001600 00000 n 
-0000002894 00000 n 
+0000001411 00000 n 
+0000002705 00000 n 
 0000000009 00000 n 
 0000000118 00000 n 
-0000001657 00000 n 
-0000001747 00000 n 
-0000001842 00000 n 
-0000001940 00000 n 
-0000002042 00000 n 
-0000002130 00000 n 
-0000002224 00000 n 
-0000002321 00000 n 
-0000002422 00000 n 
-0000002515 00000 n 
-0000002607 00000 n 
-0000002701 00000 n 
-0000002799 00000 n 
-0000003130 00000 n 
-0000003248 00000 n 
+0000001468 00000 n 
+0000001558 00000 n 
+0000001653 00000 n 
+0000001751 00000 n 
+0000001853 00000 n 
+0000001941 00000 n 
+0000002035 00000 n 
+0000002132 00000 n 
+0000002233 00000 n 
+0000002326 00000 n 
+0000002418 00000 n 
+0000002512 00000 n 
+0000002610 00000 n 
+0000002941 00000 n 
+0000003059 00000 n 
 trailer
 <<
 /Size 20
@@ -284,5 +278,5 @@ trailer
 /Info 18 0 R
 >>
 startxref
-3352
+3163
 %%EOF
