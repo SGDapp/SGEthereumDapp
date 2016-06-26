@@ -23,7 +23,7 @@ text-align:center
 hr{
 background-color: #aaa;
 border: 0 none;
-height: 1.5px; 
+height: 1.5px;
 }
 
 .customButton{
@@ -193,4 +193,8 @@ width:100%;
  background-color: #808080;
  border: 2px solid #fff;
  box-shadow: 0 0 0 2px #808080;
+}
+.showCursorHand{
+  cursor: pointer;
+  cursor: hand;
 }

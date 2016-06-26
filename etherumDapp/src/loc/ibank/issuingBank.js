@@ -3,23 +3,14 @@ var app = angular.module('dapp.loc.ibank', ['ui.router']);
 var customPdfGenerator = require('./pdfContents.js');
 app.controller('issuingBankCtrl', function($scope,Api,$http) {
 
-    var lcPdf = customPdfGenerator.createPdf();
+    var lcPdf;
+    var pdf;
+    $scope.isLcCreated= false;
+    $scope.billOfLading =true;
+    $scope.invoice = false;
+    $scope.transportDoc=false;
 
-  // lcPdf.output('save', 'LetterOfCredit.pdf'); //Try to save PDF as a file (not works on ie before 10, and some mobile devices)
-  /*
-      var pdfData = lcPdf.output('arraybuffer')
-      alternative way to save as blob
-              var pdf = new Blob([pdfData], {
-                  type: 'application/pdf'
-              });
-
-  */
-      var pdf = lcPdf.output('blob');
-    /*
-    // open pdf in new window
-      var fileURL = URL.createObjectURL(pdf);
-      window.open(fileURL);
-*/
+    function uploadPdf(){
       var data = new FormData();
       data.append('pdfFile' , pdf);
 
@@ -31,7 +22,6 @@ app.controller('issuingBankCtrl', function($scope,Api,$http) {
                         'Content-Type': undefined
                     }
                 };
-
                 // SEND THE FILES.
                 $http(request)
                     .success(function (d) {
@@ -40,15 +30,52 @@ app.controller('issuingBankCtrl', function($scope,Api,$http) {
                     .error(function () {
                     });
 
-$scope.lcStatus=5;
+    }
+
+
+  // lcPdf.output('save', 'LetterOfCredit.pdf'); //Try to save PDF as a file (not works on ie before 10, and some mobile devices)
+  /*
+      var pdfData = lcPdf.output('arraybuffer')
+      alternative way to save as blob
+              var pdf = new Blob([pdfData], {
+                  type: 'application/pdf'
+              });
+
+  */
+
+    /*
+    // open pdf in new window
+      var fileURL = URL.createObjectURL(pdf);
+      window.open(fileURL);
+*/
+
+$scope.lcStatus=1;
 $scope.message="";
 
-console.log($scope.issuingBankName);
+//console.log($scope.issuingBankName);
 
-$scope.createLC = function(){
+$scope.createLCPdf = function(){
     $scope.isLcCreated= true;
+    var docsToBeSubmitted="";
+    if($scope.billOfLading)docsToBeSubmitted="Bill OF Lading,";
+    if($scope.invoice)docsToBeSubmitted=docsToBeSubmitted+"Invoice,";
+    if($scope.transportDoc)docsToBeSubmitted=docsToBeSubmitted+"Transport Documents";
+    lcPdf = customPdfGenerator.createPdf($scope.issuingBankDetails,$scope.advisingBankDetails,$scope.applicantDetails,$scope.beneficiaryDetails,docsToBeSubmitted,$scope.deadline,$scope.amountToBePaid,$scope.conditions);
+    pdf= lcPdf.output('blob');
+    //lcPdf.output('save', 'LetterOfCredit.pdf');
+    //console.log($scope.billOfLading);
+    //console.log($scope.invoice);
 }
 
+$scope.viewLCPdf =function() {
+  var fileURL = URL.createObjectURL(pdf);
+  window.open(fileURL);
+
+}
+
+$scope.downloadLCPdf =function() {
+    lcPdf.output('save', 'LetterOfCredit.pdf');
+}
 
 $scope.issueLC = function () {
     $scope.digitallySign=true;

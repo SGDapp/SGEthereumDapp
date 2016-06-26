@@ -25,25 +25,34 @@
                 <div class="col-md-4"></div>
             </div>
             <div class="row well">
-                <div>
-                    <!--  display message  -->
-                </div>
+
                 <div ng-show="lcStatus==1">
                     <!--   Request to issue lc  -->
                     <h3 class="textAllignCenter">Issue LC</h3>
-                    <br />
 
-                    <div ng-click="createLC()" class="{{(isLcCreated)?'reqBoxGrey':'reqBoxBlue'}} divCenter" data-toggle="modal" data-target="#myModal">
+                    <div  class="{{(isLcCreated)?'reqBoxGrey':'reqBoxBlue'}} divCenter" data-toggle="modal" data-target="#myModal">
                         <i class="fa fa-file-text" aria-hidden="true"></i> Create LC
                     </div>
-
+                    <br />
+                    <div  class="row">
+                      <div class="col-md-5"></div>
+                      <div class="col-md-2">
+                          <div style="display:inline-block" ng-click="viewLCPdf()" class="{{(isLcCreated)?'titleBoxBlue showCursorHand':'titleBoxDisabled'}} " >
+                              <i class="fa fa-eye" aria-hidden="true"></i>
+                          </div>
+                          <div style="float:right " ng-click="downloadLCPdf()" class="{{(isLcCreated)?'titleBoxBlue showCursorHand':'titleBoxDisabled'}} " >
+                              <i class="fa fa-download" aria-hidden="true"></i>
+                          </div>
+                      </div>
+                      <div class="col-md-5"></div>
+                    </div>
                     <br />
 
-                    <div class="reqBoxBlue divCenter" ng-click="issueLC()" >
+                    <div class="{{(isLcCreated)?'reqBoxBlue':'reqBoxGrey'}} divCenter" ng-click="issueLC()" >
                         <i class="fa fa-file-text" aria-hidden="true"></i> Digitally Sign
                         <i ng-show="digitallySign" style="color:black" class="fa fa-key fa-2x" aria-hidden="true"></i>
                     </div>
-                    <br /><br /><br /> 
+
                 </div>
 
 
@@ -59,19 +68,21 @@
                                 <h2 class="modal-title textAllignCenter">Letter of Credit</h2>
                             </div>
                             <div class="modal-body issuing-bank-modal">
-                              <label class="ibank-label">Issuing Bank:</label><input type="text-area" class="form-control input-lg" ng-model="issuingBankName"/>
-                               <label class="ibank-label">Advising Bank:</label><input type="text" class="form-control input-lg" ng-model="advisingBankName"/>
-                               <label class="ibank-label">Applicant:</label><input type="text" class="form-control input-lg" ng-model="applicantName"/>
-                               <label class="ibank-label">Beneficiary:</label><input type="text" class="form-control input-lg" ng-model="beneficiaryName"/>
+                              <label class="ibank-label">Issuing Bank Details:</label><textarea rows="2" class="form-control input-lg" ng-model="issuingBankDetails" ></textarea>
+                               <label class="ibank-label">Advising Bank Details:</label><textarea  rows="2" class="form-control input-lg" ng-model="advisingBankDetails"></textarea>
+                               <label class="ibank-label">Applicant Details:</label><textarea rows="2" class="form-control input-lg" ng-model="applicantDetails"></textarea>
+                               <label class="ibank-label">Beneficiary Details:</label><textarea  rows="2" class="form-control input-lg" ng-model="beneficiaryDetails" ></textarea>
                                <label class="ibank-label">Documents to be submitted:</label>
                                 <div class="ibank-label"><input type="checkbox" ng-model="billOfLading" /><label>Bill of Lading </label>
                                    <input type="checkbox" ng-model="invoice" /> <label> Invoice </label>
                                     <input type="checkbox" ng-model="transportDoc" /><label> Transport Documents </label>
                                 </div>
-                                <label class="ibank-label">Delivery Deadline:</label><input type="date" class="form-control" ng-model="deadline"/>
+                                <label class="ibank-label">Delivery Deadline:</label><input  class="form-control" ng-model="deadline"/>
+                                <label class="ibank-label">Amount To Be Payed:</label><input type="text"  class="form-control input-lg" ng-model="amountToBePaid" />
+                                <label class="ibank-label">Conditions:</label><textarea  rows="2" class="form-control input-lg" ng-model="conditions" ></textarea>
                             </div>
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-primary" data-dismiss="modal">Submit</button>
+                                <button type="button" class="btn btn-primary" ng-click="createLCPdf()" data-dismiss="modal">Submit</button>
                             </div>
                         </div>
 
