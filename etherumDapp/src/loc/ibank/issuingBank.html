@@ -1,1 +1,156 @@
+<div class="textAllignCenter">
+    <img src="/assets/images/SGlogo.png" />
+</div>
 
+<div>
+    <hr style="background-color: #aaa;border: 0 none;height: 1.7px;" />
+    <div class="row " style="margin:15px">
+
+        <div class="col-md-8 ">
+            <div class="row well">
+                <div class="col-md-4"></div>
+                <div class="col-md-4">
+                    <div class="col-md-6">
+                        <div class="divCenter {{(lcStatus!=1)?'titleBoxBlue':'titleBoxBrown'}}{{(1<=lcStatus)?'':' titleBoxDisabled'}}">
+                            <i class="fa fa-file-text" aria-hidden="true"></i>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="divCenter {{(lcStatus!=8)?'titleBoxBlue':'titleBoxBrown'}}{{(8<=lcStatus)?'':' titleBoxDisabled'}}">
+                            <i class="fa fa-money" aria-hidden="true"></i>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="col-md-4"></div>
+            </div>
+            <div class="row well">
+                <div>
+                    <!--  display message  -->
+                </div>
+                <div ng-show="lcStatus==1">
+                    <!--   Request to issue lc  -->
+                    <h3 class="textAllignCenter">Issue LC</h3>
+                    <br />
+
+                    <div ng-click="createLC()" class="{{(isLcCreated)?'reqBoxGrey':'reqBoxBlue'}} divCenter" data-toggle="modal" data-target="#myModal">
+                        <i class="fa fa-file-text" aria-hidden="true"></i> Create LC
+                    </div>
+
+                    <br />
+
+                    <div class="reqBoxBlue divCenter" ng-click="issueLC()" >
+                        <i class="fa fa-file-text" aria-hidden="true"></i> Digitally Sign
+                        <i ng-show="digitallySign" style="color:black" class="fa fa-key fa-2x" aria-hidden="true"></i>
+                    </div>
+                    <br /><br /><br /> 
+                </div>
+
+
+                <!-- modal-->
+
+                <div id="myModal" class="modal fade " role="dialog">
+                    <div class="modal-dialog modal-lg">
+
+                        <!-- Modal content-->
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                <h2 class="modal-title textAllignCenter">Letter of Credit</h2>
+                            </div>
+                            <div class="modal-body issuing-bank-modal">
+                              <label class="ibank-label">Issuing Bank:</label><input type="text-area" class="form-control input-lg" ng-model="issuingBankName"/>
+                               <label class="ibank-label">Advising Bank:</label><input type="text" class="form-control input-lg" ng-model="advisingBankName"/>
+                               <label class="ibank-label">Applicant:</label><input type="text" class="form-control input-lg" ng-model="applicantName"/>
+                               <label class="ibank-label">Beneficiary:</label><input type="text" class="form-control input-lg" ng-model="beneficiaryName"/>
+                               <label class="ibank-label">Documents to be submitted:</label>
+                                <div class="ibank-label"><input type="checkbox" ng-model="billOfLading" /><label>Bill of Lading </label>
+                                   <input type="checkbox" ng-model="invoice" /> <label> Invoice </label>
+                                    <input type="checkbox" ng-model="transportDoc" /><label> Transport Documents </label>
+                                </div>
+                                <label class="ibank-label">Delivery Deadline:</label><input type="date" class="form-control" ng-model="deadline"/>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-primary" data-dismiss="modal">Submit</button>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+
+                <!-- modal ends -->
+
+
+                <div ng-show="lcStatus==9">
+                    <!--   Request to issue lc  -->
+                    <h3 class="textAllignCenter">Permission for making payment</h3>
+                    <br />
+                    <div class="reqBoxBlue divCenter" ng-click="makePaymentPermission()">
+                        <i class="fa fa-truck" aria-hidden="true"></i> Digitally Sign
+                        <i ng-show="digitallySign" style="color:black" class="fa fa-key fa-2x" aria-hidden="true"></i>
+
+                    </div>
+                    <br /><br /><br /> <br /><br /><br /> <br /><br /><br />
+                </div>
+
+
+                <div ng-show="lcStatus!=1 && lcStatus!=9 ">
+
+                    <br /><br /><br /><br /><br /><br /><br />
+                    <h3 class="textAllignCenter">{{message}}</h3>
+                    <br />
+
+                    <br /><br /><br /> <br /><br /><br /> <br />
+                </div>
+
+
+
+            </div>
+        </div>
+        <div class="col-md-4 ">
+            <div class="well">
+
+                <!--  ----------->
+                <wallet wallet-owner="'Seller'" asset-balance="40" account-address="123456789"></wallet>
+
+                <!----------------->
+                </br>
+                <h4 class="textAllignCenter">Contract Details</h4>
+
+                <div class="panel panel-primary">
+                    <div class="panel-body wrap">
+                        <table>
+                            <tr>
+                                <td>
+                                    <h5>Issuing Bank:</h5>
+                                </td>
+                                <td>
+                                    <h5>SG India</h5>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <h5>Advisory Bank:</h5>
+                                </td>
+                                <td>
+                                    <h5>SG China</h5>
+                                </td>
+                            </tr>
+                        </table>
+                        <div class="row" style="margin:10px">
+                            <div class="col-md-4 ">
+                                <div class="docBoxBlue">LC</div>
+                            </div>
+                            <div class="col-md-4 ">
+                                <div class="docBoxGrey">BOL</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+    <loc-status current-status="lcStatus"></loc-status>
