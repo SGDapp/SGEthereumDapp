@@ -26,13 +26,13 @@ Api.letterOfCredit.contractData.get().$promise.then(function(data){
 
 Api.letterOfCredit.getAccounts.get().$promise.then(function(data){
     console.log(data);
-    $scope.buyerAccountAddress=data[0];
+    $scope.buyerAccountAddress=data[1];
   },function(error) {
                 console.log('error', error);
 });
 Api.letterOfCredit.getAccountBalances.get().$promise.then(function(data){
     console.log(data);
-    $scope.buyerAccountBalance=data[0];
+    $scope.buyerAccountBalance=data[1];
   },function(error) {
                 console.log('error', error);
 });

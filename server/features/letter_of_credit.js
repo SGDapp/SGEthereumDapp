@@ -1,7 +1,7 @@
 var letterOfCredit = function(app,web3NodeB,baseUrl,multer,hashFiles,fs,customTransactionLog) {
 
-  var ABI=[{"constant":false,"inputs":[],"name":"dispatchGoods","outputs":[],"type":"function"},{"constant":true,"inputs":[],"name":"lcHash","outputs":[{"name":"","type":"bytes32"}],"type":"function"},{"constant":false,"inputs":[{"name":"a","type":"bytes32"},{"name":"b","type":"bytes32"}],"name":"compare","outputs":[{"name":"","type":"int256"}],"type":"function"},{"constant":true,"inputs":[],"name":"bolHash2","outputs":[{"name":"","type":"bytes32"}],"type":"function"},{"constant":false,"inputs":[{"name":"_seller","type":"address"},{"name":"_shippingAgent","type":"address"},{"name":"_assetValue","type":"uint256"}],"name":"goodsReceived","outputs":[],"type":"function"},{"constant":true,"inputs":[],"name":"sellerAddress","outputs":[{"name":"","type":"address"}],"type":"function"},{"constant":true,"inputs":[],"name":"bolHash1","outputs":[{"name":"","type":"bytes32"}],"type":"function"},{"constant":true,"inputs":[],"name":"buyerAddress","outputs":[{"name":"","type":"address"}],"type":"function"},{"constant":false,"inputs":[],"name":"clearContract","outputs":[],"type":"function"},{"constant":false,"inputs":[{"name":"_hash","type":"string"}],"name":"issueLC","outputs":[],"type":"function"},{"constant":false,"inputs":[],"name":"goodsDelivered","outputs":[],"type":"function"},{"constant":false,"inputs":[],"name":"confirmPayment","outputs":[],"type":"function"},{"constant":false,"inputs":[],"name":"issueLCRequest","outputs":[],"type":"function"},{"constant":true,"inputs":[],"name":"lcStatus","outputs":[{"name":"","type":"uint256"}],"type":"function"},{"constant":true,"inputs":[],"name":"shippingAgentAddress","outputs":[{"name":"","type":"address"}],"type":"function"},{"constant":true,"inputs":[],"name":"assetValue","outputs":[{"name":"","type":"uint256"}],"type":"function"},{"constant":false,"inputs":[],"name":"transportGoods","outputs":[],"type":"function"},{"constant":false,"inputs":[],"name":"makePayment","outputs":[],"type":"function"},{"constant":false,"inputs":[{"name":"_a","type":"bytes32"},{"name":"_b","type":"bytes32"}],"name":"equal","outputs":[{"name":"","type":"bool"}],"type":"function"},{"constant":false,"inputs":[],"name":"verifyLC","outputs":[],"type":"function"},{"constant":false,"inputs":[],"name":"compareHash","outputs":[],"type":"function"},{"constant":false,"inputs":[{"name":"_hash","type":"string"}],"name":"uploadBOL","outputs":[],"type":"function"},{"anonymous":false,"inputs":[{"indexed":false,"name":"str","type":"string"}],"name":"CustomLog","type":"event"}];
-  var Address="0x71572bf721e22abc29a6e71ec985119e6a1dc7b9";
+  var ABI=[{"constant":false,"inputs":[{"name":"_seller","type":"address"}],"name":"dispatchGoods","outputs":[],"type":"function"},{"constant":true,"inputs":[],"name":"lcHash","outputs":[{"name":"","type":"bytes32"}],"type":"function"},{"constant":false,"inputs":[{"name":"a","type":"bytes32"},{"name":"b","type":"bytes32"}],"name":"compare","outputs":[{"name":"","type":"int256"}],"type":"function"},{"constant":true,"inputs":[],"name":"bolHash2","outputs":[{"name":"","type":"bytes32"}],"type":"function"},{"constant":true,"inputs":[],"name":"sellerAddress","outputs":[{"name":"","type":"address"}],"type":"function"},{"constant":true,"inputs":[],"name":"bolHash1","outputs":[{"name":"","type":"bytes32"}],"type":"function"},{"constant":true,"inputs":[],"name":"buyerAddress","outputs":[{"name":"","type":"address"}],"type":"function"},{"constant":false,"inputs":[],"name":"clearContract","outputs":[],"type":"function"},{"constant":false,"inputs":[{"name":"_hash","type":"string"}],"name":"issueLC","outputs":[],"type":"function"},{"constant":false,"inputs":[],"name":"confirmPayment","outputs":[],"type":"function"},{"constant":false,"inputs":[{"name":"_shippingAgent","type":"address"}],"name":"goodsDelivered","outputs":[],"type":"function"},{"constant":false,"inputs":[],"name":"issueLCRequest","outputs":[],"type":"function"},{"constant":true,"inputs":[],"name":"lcStatus","outputs":[{"name":"","type":"uint256"}],"type":"function"},{"constant":false,"inputs":[{"name":"_assetValue","type":"uint256"}],"name":"goodsReceived","outputs":[],"type":"function"},{"constant":true,"inputs":[],"name":"shippingAgentAddress","outputs":[{"name":"","type":"address"}],"type":"function"},{"constant":true,"inputs":[],"name":"assetValue","outputs":[{"name":"","type":"uint256"}],"type":"function"},{"constant":false,"inputs":[],"name":"transportGoods","outputs":[],"type":"function"},{"constant":false,"inputs":[],"name":"makePayment","outputs":[],"type":"function"},{"constant":false,"inputs":[{"name":"_a","type":"bytes32"},{"name":"_b","type":"bytes32"}],"name":"equal","outputs":[{"name":"","type":"bool"}],"type":"function"},{"constant":false,"inputs":[],"name":"verifyLC","outputs":[],"type":"function"},{"constant":false,"inputs":[],"name":"compareHash","outputs":[],"type":"function"},{"constant":false,"inputs":[{"name":"_hash","type":"string"}],"name":"uploadBOL","outputs":[],"type":"function"},{"anonymous":false,"inputs":[{"indexed":false,"name":"str","type":"string"}],"name":"CustomLog","type":"event"}];
+  var Address="0xd462ac5d5661f99be8f3664ae2e7c7fec285483f";
   var LOC = web3NodeB.eth.contract(ABI).at(Address);
 
   var event = LOC.CustomLog();
@@ -111,7 +111,7 @@ var letterOfCredit = function(app,web3NodeB,baseUrl,multer,hashFiles,fs,customTr
     res.send(txId);
   });
   app.get(baseUrl+"letterOfCredit/dispatchGoods", function(req, res) {
-    var txId = LOC.dispatchGoods({from:web3NodeB.eth.accounts[0]});
+    var txId = LOC.dispatchGoods(req.query.sellerAddress,{from:web3NodeB.eth.accounts[0]});
     var transaction = web3NodeB.eth.getTransaction(txId);
     customTransactionLog("Seller Dispatched Goods",txId,transaction);
     res.send(txId);
@@ -119,7 +119,7 @@ var letterOfCredit = function(app,web3NodeB,baseUrl,multer,hashFiles,fs,customTr
   app.post(baseUrl+"letterOfCredit/uploadBOL", bolUpload ,function(req, res) {
 
     var tmp_path = req.file.path;
-    var target_path="../targetFiles/LetterOfCredit/billOfLading";
+    var target_path="./targetFiles/LetterOfCredit/billOfLading";
     fs.rename(tmp_path, target_path, function(err) {
           if (err) throw err;
           // delete the temporary file, so that the explicitly set temporary upload dir does not get filled with unwanted files
@@ -128,9 +128,10 @@ var letterOfCredit = function(app,web3NodeB,baseUrl,multer,hashFiles,fs,customTr
             });
      });
      var options={
-		     files:['../targetFiles/LetterOfCredit/billOfLading'],
+		     files:['./targetFiles/LetterOfCredit/billOfLading'],
 		     algorithm: "sha256"
 	      }
+
 	  hashFiles(options, function(error, hash) {
     	  // hash will be a string if no error occurred
 		    console.log("Shiipping Agent uploaded BOL hash : "+hash);
@@ -138,7 +139,7 @@ var letterOfCredit = function(app,web3NodeB,baseUrl,multer,hashFiles,fs,customTr
         var txId=LOC.uploadBOL(hash,{from:web3NodeB.eth.accounts[0]});
         var transaction = web3NodeB.eth.getTransaction(txId);
         customTransactionLog("Shipping Agent Uploaded BOL",txId,transaction);
-        res.send(txId);
+        //res.send(txId);
 	  });
 
   });
@@ -149,13 +150,13 @@ var letterOfCredit = function(app,web3NodeB,baseUrl,multer,hashFiles,fs,customTr
     res.send(txId);
   });
   app.get(baseUrl+"letterOfCredit/goodsDelivered", function(req, res) {
-    var txId = LOC.goodsDelivered({from:web3NodeB.eth.accounts[0]});
+    var txId = LOC.goodsDelivered(req.query.shippingAgentAddress,{from:web3NodeB.eth.accounts[0]});
     var transaction = web3NodeB.eth.getTransaction(txId);
     customTransactionLog("Shipping Agent Confirms That GOods Have Been Delivered",txId,transaction);
     res.send(txId);
   });
   app.get(baseUrl+"letterOfCredit/goodsReceived", function(req, res) {
-    var txId=LOC.goodsReceived(req.query.sellerAddress,req.query.shippingAgentAddress,20,{from:web3NodeB.eth.accounts[3],value: web3NodeB.toWei(20, 'ether')});
+    var txId=LOC.goodsReceived(20,{from:web3NodeB.eth.accounts[5],value: web3NodeB.toWei(20, 'ether')});
     var transaction = web3NodeB.eth.getTransaction(txId);
     customTransactionLog("Buyer Confirems that goods have been received",txId,transaction);
     res.send(txId);

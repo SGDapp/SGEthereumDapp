@@ -36,13 +36,13 @@ app.controller('issuingBankCtrl', function($scope,Api,$http,$timeout) {
 
     Api.letterOfCredit.getAccounts.get().$promise.then(function(data){
         console.log(data);
-        $scope.sellerAccountAddress=data[2];
+        $scope.sellerAccountAddress=data[3];
       },function(error) {
                     console.log('error', error);
     });
     Api.letterOfCredit.getAccountBalances.get().$promise.then(function(data){
         console.log(data);
-        $scope.sellerAccountBalance=data[2];
+        $scope.sellerAccountBalance=data[3];
       },function(error) {
                     console.log('error', error);
     });
@@ -121,6 +121,11 @@ $scope.issueLC = function () {
 
 $scope.makePaymentPermission =function(){
     $scope.digitallySign=true;
+    Api.letterOfCredit.confirmPayment.confirm().$promise.then(function(data){
+        console.log(data);
+      },function(error) {
+                    console.log('error', error);
+    });
 }
 
 

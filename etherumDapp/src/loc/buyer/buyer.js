@@ -2,6 +2,9 @@ var app = angular.module('dapp.loc.buyer', ['ui.router']);
 app.controller('buyerCtrl', function($scope,Api,$timeout) {
 $scope.contractData={};
 $scope.buyerAccountAddress="";
+/*	$scope.change= function(){
+		$scope.lstatus=$scope.no;
+	}*/
 //$scope.lcStatus=0;
 	Api.letterOfCredit.contractData.get().$promise.then(function(data){
 			//console.log(data)
@@ -42,9 +45,7 @@ $scope.buyerAccountAddress="";
 	});
 
 $scope.goodsReceived=false;
-	$scope.change= function(){
-		$scope.lstatus=$scope.no;
-	}
+
 	$scope.requestLC =function(){
 		$scope.digitallySign=true;
 		Api.letterOfCredit.requestToIssueLC.request().$promise.then(function(data){
@@ -55,9 +56,19 @@ $scope.goodsReceived=false;
 	}
 	$scope.goodsReceived =function(){
 		$scope.digitallySign=true;
+		Api.letterOfCredit.goodsReceived.confirm().$promise.then(function(data){
+				console.log(data)
+			},function(error) {
+										console.log('error', error);
+		});
 	}
 	$scope.makePayment =function(){
 		$scope.digitallySign=true;
+		Api.letterOfCredit.makePayment.confirm().$promise.then(function(data){
+				console.log(data)
+			},function(error) {
+										console.log('error', error);
+		});
 	}
 
 

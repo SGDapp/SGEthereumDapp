@@ -28,7 +28,12 @@ app.factory('Api',  function($resource) {
       contractData: $resource(baseUrl+'letterOfCredit/getContractData',{},{get:{method:'GET' }}),
       requestToIssueLC: $resource(baseUrl+'letterOfCredit/requestToIssueLC',{},{request:{method:'GET' }}),
       verifyLC: $resource(baseUrl+'letterOfCredit/verifyLC',{},{verify:{method:'GET' }}),
-      dispatchGoods: $resource(baseUrl+'letterOfCredit/dispatchGoods',{},{dispatch:{method:'GET' }}),
+      dispatchGoods: $resource(baseUrl+'letterOfCredit/dispatchGoods',{},{dispatch:{method:'GET',params:{sellerAddress:'@sellerAddress'}}}),
+      transportGoods: $resource(baseUrl+'letterOfCredit/transportGoods',{},{transport:{method:'GET' }}),
+      goodsDelivered: $resource(baseUrl+'letterOfCredit/goodsDelivered',{},{confirm:{method:'GET',params:{shippingAgentAddress:'@shippingAgentAddress'}}}),
+      goodsReceived: $resource(baseUrl+'letterOfCredit/goodsReceived',{},{confirm:{method:'GET' }}),
+      confirmPayment: $resource(baseUrl+'letterOfCredit/confirmPayment',{},{confirm:{method:'GET' }}),
+      makePayment: $resource(baseUrl+'letterOfCredit/makePayment',{},{confirm:{method:'GET' }}),
 
     }
 

@@ -46,7 +46,7 @@ Api.letterOfCredit.getAccountBalances.get().$promise.then(function(data){
 
 $scope.dispatchGoods =function(){
 		$scope.digitallySign=true;
-    Api.letterOfCredit.dispatchGoods.dispatch().$promise.then(function(data){
+    Api.letterOfCredit.dispatchGoods.dispatch({sellerAddress: $scope.sellerAccountAddress}).$promise.then(function(data){
         console.log(data)
       },function(error) {
                     console.log('error', error);
