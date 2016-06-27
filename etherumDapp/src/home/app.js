@@ -92,8 +92,12 @@ Api.payements.getNodeAAccounts.get().$promise.then(function(data){
 
 //get NodeB Accounts
 Api.payements.getNodeBAccounts.get().$promise.then(function(data){
-		//console.log(data)
-		$scope.nodeB_Accounts = data;
+		//console.log(data)data;
+    var accounts =[];
+    accounts[0]= data[0];
+    accounts[1]= data[1];
+    accounts[2]= data[2];
+		$scope.nodeB_Accounts = accounts;
 	},function(error) {
                 console.log('error', error);
 });
@@ -170,7 +174,11 @@ $scope.buttonVisibility=false;
 $scope.nodeB_Accounts=[];
 Api.payements.getNodeBAccounts.get().$promise.then(function(data){
 		//console.log(data)
-		$scope.nodeB_Accounts = data;
+    var accounts =[];
+    accounts[0]= data[0];
+    accounts[1]= data[1];
+    accounts[2]= data[2];
+    $scope.nodeB_Accounts = accounts; 
 	},function(error) {
                 console.log('error', error);
 });
