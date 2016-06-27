@@ -1,1 +1,109 @@
+<div>
+    <hr style="background-color: #aaa;border: 0 none;height: 1.7px;" />
+    <div class="row " style="margin:15px">
 
+        <div class="col-md-8 ">
+           <div class="row well" >
+        <div class="col-md-4"></div>
+        <div class="col-md-4">
+          <div class="col-md-4">
+            <div class="{{(lcStatus==4)?'titleBoxBrown':'titleBoxBlue'}}{{(4<=lcStatus)?'':' titleBoxDisabled'}}" >
+              <i class="fa fa-file-text" aria-hidden="true"></i>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="{{(lcStatus!=5)?'titleBoxBlue':'titleBoxBrown'}}{{(5<=lcStatus)?'':' titleBoxDisabled'}}" >
+              <i class="fa fa-ship" aria-hidden="true"></i>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="{{(lcStatus!=6)?'titleBoxBlue':'titleBoxBrown'}}{{(6<=lcStatus)?'':' titleBoxDisabled'}}" >
+              <i class="fa fa-thumbs-up" aria-hidden="true"></i>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4"></div>
+      </div>
+            <div class="row well">
+
+               <div ng-show="lcStatus==4">
+                    <div class="col-md-4"></div>
+                    <div class="col-md-4">
+                    <h3 class="textAllignCenter">Upload Bill of Lading</h3>
+                    <br />
+                    <!--<div class="reqBoxBlue divCenter" ng-click="uploadBol()">
+                        <i class="fa fa-file-text" aria-hidden="true"></i> Upload BOL  
+                        <i ng-show="digitallySign" style="color:black" class="fa fa-key fa-2x" aria-hidden="true"></i>
+
+                    </div>-->
+                    <br /> <br />
+                    <form id="upload_form" enctype="multipart/form-data" method="post" action="http://localhost:3344/uploadBolBuyer">
+							<input style="width:100%" id="uploadFile2"  type="text" class="form-control" placeholder="Choose File" disabled="disabled" />
+							<div class="fileUpload btn btn-primary">
+							    <span>Browse</span>
+							    <input  id="uploadBtn2" type="file" name="myFile" class="upload" />
+							</div>
+						        <input type="submit" class="btn btn-success" value="Upload"/>				
+						</form>
+                        <br /><br /><br /> <br /><br />
+                       </div>
+                        <div class="col-md-4"></div>
+                    
+                </div>
+
+                <div ng-show="lcStatus==5">
+                   
+                    <h3 class="textAllignCenter">Goods Dispatched</h3>
+                    <br />
+                    <div class="reqBoxBlue divCenter" ng-click="goodsDispatched()">
+                        <i class="fa fa-ship" aria-hidden="true"></i> Digitally Sign
+                        <i ng-show="digitallySign" style="color:black" class="fa fa-key fa-2x" aria-hidden="true"></i>
+
+                    </div>
+                    <br /><br /><br /> <br /><br /><br /> <br /><br /><br />
+                </div>
+
+                <div ng-show="lcStatus==6">
+                   
+                    <h3 class="textAllignCenter">Goods Delivered</h3>
+                    <br />
+                    <div class="reqBoxBlue divCenter" ng-click="goodsDelivered()">
+                        <i class="fa fa-thumbs-up" aria-hidden="true"></i> Digitally Sign
+                        <i ng-show="digitallySign" style="color:black" class="fa fa-key fa-2x" aria-hidden="true"></i>
+
+                    </div>
+                    <br /><br /><br /> <br /><br /><br /> <br /><br /><br />
+                </div>
+
+
+                <div ng-show="lcStatus<4 || lcStatus>6 ">
+
+                    <br /><br /><br /><br /><br /><br /><br />
+                    <h3 class="textAllignCenter">{{message}}</h3>
+                    <br />
+
+                    <br /><br /><br /> <br /><br /><br /> <br />
+                </div>
+
+
+
+            </div>
+        </div>
+        <div class="col-md-4 ">
+            <div class="well">
+
+                <!--  ----------->
+
+                <br /><br /><br /><br /><br /><br /><br /><br />
+                <wallet wallet-owner="'Shipping Agent'" asset-balance="40" account-address="123456789"></wallet>
+
+                <!----------------->
+                </br><br /><br /><br /><br /><br /><br />
+               
+
+
+
+            </div>
+        </div>
+    </div>
+    <loc-status current-status="lcStatus"></loc-status>
