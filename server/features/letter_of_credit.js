@@ -156,7 +156,7 @@ var letterOfCredit = function(app,web3NodeB,baseUrl,multer,hashFiles,fs,customTr
     res.send(txId);
   });
   app.get(baseUrl+"letterOfCredit/goodsReceived", function(req, res) {
-    var txId=LOC.goodsReceived(20,{from:web3NodeB.eth.accounts[5],value: web3NodeB.toWei(20, 'ether')});
+    var txId=LOC.goodsReceived(20,{from:web3NodeB.eth.accounts[3],value: web3NodeB.toWei(20, 'ether')});
     var transaction = web3NodeB.eth.getTransaction(txId);
     customTransactionLog("Buyer Confirems that goods have been received",txId,transaction);
     res.send(txId);
