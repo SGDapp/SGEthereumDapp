@@ -1,7 +1,7 @@
 var app = angular.module('dapp.loc.ibank', ['ui.router']);
 
 var customPdfGenerator = require('./pdfContents.js');
-app.controller('issuingBankCtrl', function($scope,Api,$http) {
+app.controller('issuingBankCtrl', function($scope,Api,$http,$timeout) {
 
     var lcPdf;
     var pdf;
@@ -9,6 +9,43 @@ app.controller('issuingBankCtrl', function($scope,Api,$http) {
     $scope.billOfLading =true;
     $scope.invoice = false;
     $scope.transportDoc=false;
+    $scope.message="";
+
+    Api.letterOfCredit.contractData.get().$promise.then(function(data){
+        //console.log(data)
+        $scope.contractData=data;
+        $timeout(function () {
+          $scope.lcStatus=data.lcStatus;
+          console.log($scope.lcStatus);
+
+          if($scope.lcStatus>1 && $scope.lcStatus<9){
+          $scope.message="LC issued . Waiting for buyer confirmation on receiving goods..."
+          }
+
+          if($scope.lcStatus>9){
+          $scope.message="Payment Done"
+          }
+
+        }, 1000);
+
+
+
+      },function(error) {
+          console.log('error', error);
+    });
+
+    Api.letterOfCredit.getAccounts.get().$promise.then(function(data){
+        console.log(data);
+        $scope.sellerAccountAddress=data[2];
+      },function(error) {
+                    console.log('error', error);
+    });
+    Api.letterOfCredit.getAccountBalances.get().$promise.then(function(data){
+        console.log(data);
+        $scope.sellerAccountBalance=data[2];
+      },function(error) {
+                    console.log('error', error);
+    });
 
     function uploadPdf(){
       var data = new FormData();
@@ -16,7 +53,7 @@ app.controller('issuingBankCtrl', function($scope,Api,$http) {
 
                 var request = {
                     method: 'POST',
-                    url: '/ethereumDapp/uploadLC',
+                    url: '/ethereumDapp/letterOfCredit/issueLC',
                     data: data,
                     headers: {
                         'Content-Type': undefined
@@ -29,7 +66,7 @@ app.controller('issuingBankCtrl', function($scope,Api,$http) {
                     })
                     .error(function () {
                     });
-
+$scope.message="";
     }
 
 
@@ -49,8 +86,8 @@ app.controller('issuingBankCtrl', function($scope,Api,$http) {
       window.open(fileURL);
 */
 
-$scope.lcStatus=1;
-$scope.message="";
+
+
 
 //console.log($scope.issuingBankName);
 
@@ -86,12 +123,6 @@ $scope.makePaymentPermission =function(){
     $scope.digitallySign=true;
 }
 
-if($scope.lcStatus>1 && $scope.lcStatus<9){
-$scope.message="LC issued . Waiting for buyer confirmation on receiving goods..."
-}
 
-if($scope.lcStatus>9){
-$scope.message="Payment Done"
-}
 
 });

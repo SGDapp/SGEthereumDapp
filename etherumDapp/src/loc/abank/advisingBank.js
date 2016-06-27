@@ -1,16 +1,52 @@
 var app = angular.module('dapp.loc.abank', ['ui.router']);
-app.controller('advisingBankCtrl', function($scope,Api) {
-$scope.lcStatus=10
+app.controller('advisingBankCtrl', function($scope,Api,$timeout) {
+
+Api.letterOfCredit.contractData.get().$promise.then(function(data){
+    //console.log(data)
+    $scope.contractData=data;
+    $timeout(function () {
+      $scope.lcStatus=data.lcStatus;
+      console.log($scope.lcStatus);
+
+      if($scope.lcStatus>2 && $scope.lcStatus<=9){
+      $scope.message="LC Verified.Waiting for payment to be made..."
+      }
+      else if($scope.lcStatus==10){
+      $scope.message="Payment Made."
+      }
+
+
+    }, 1000);
+
+
+
+  },function(error) {
+      console.log('error', error);
+});
+
+Api.letterOfCredit.getAccounts.get().$promise.then(function(data){
+    console.log(data);
+    $scope.buyerAccountAddress=data[0];
+  },function(error) {
+                console.log('error', error);
+});
+Api.letterOfCredit.getAccountBalances.get().$promise.then(function(data){
+    console.log(data);
+    $scope.buyerAccountBalance=data[0];
+  },function(error) {
+                console.log('error', error);
+});
+
 
 $scope.verifyLC= function(){
     $scope.digitallySign=true;
+    Api.letterOfCredit.verifyLC.verify().$promise.then(function(data){
+				console.log(data)
+			},function(error) {
+										console.log('error', error);
+		});
 }
 
-if($scope.lcStatus>1 && $scope.lcStatus<=9){
-$scope.message="LC Verified.Waiting for payment to be made..."
-}
-else if($scope.lcStatus==10){
-$scope.message="Payment Made."
-}
+
 
 });

@@ -21,6 +21,15 @@ app.factory('Api',  function($resource) {
       transferAssets: $resource(baseUrl+'escrow/transferAssets',{},{transfer:{method:'GET',params:{transferTo:'@transferTo',transferFrom:'@transferFrom',assetValue:'@assetValue'}}}),
       accept: $resource(baseUrl+'escrow/accept',{},{get:{method:'GET',params:{accepter:'@accepter'}}}),
       contractData: $resource(baseUrl+'escrow/contractData',{},{get:{method:'GET' }}),
+    },
+    letterOfCredit:{
+      getAccounts: $resource(baseUrl+'letterOfCredit/getAccounts',{},{get:{method:'GET',isArray: true }}),
+      getAccountBalances: $resource(baseUrl+'letterOfCredit/getAccountBalances',{},{get:{method:'GET',isArray: true }}),
+      contractData: $resource(baseUrl+'letterOfCredit/getContractData',{},{get:{method:'GET' }}),
+      requestToIssueLC: $resource(baseUrl+'letterOfCredit/requestToIssueLC',{},{request:{method:'GET' }}),
+      verifyLC: $resource(baseUrl+'letterOfCredit/verifyLC',{},{verify:{method:'GET' }}),
+      dispatchGoods: $resource(baseUrl+'letterOfCredit/dispatchGoods',{},{dispatch:{method:'GET' }}),
+
     }
 
   }

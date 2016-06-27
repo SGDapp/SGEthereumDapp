@@ -9,11 +9,11 @@
       <div class="row well" >
         <div class="col-md-4"></div>
         <div class="col-md-4">
-                  
+
             <div class="divCenter {{(lcStatus!=3)?'titleBoxBlue':'titleBoxBrown'}}{{(3<=lcStatus)?'':' titleBoxDisabled'}}" >
               <i class="fa fa-truck" aria-hidden="true"></i>
-            </div> 
-          
+            </div>
+
         </div>
         <div class="col-md-4"></div>
       </div>
@@ -35,15 +35,15 @@
         </div>
 
         <div ng-show="lcStatus!=3">
-          
+
           <br /><br /><br /><br /><br /><br /><br />
           <h3 class="textAllignCenter">{{message}}</h3>
           <br />
-          
+
             <br /><br /><br />  <br /><br /><br />  <br />
         </div>
 
-       
+
 
       </div>
     </div>
@@ -51,7 +51,7 @@
       <div class="well">
 
         <!--  ----------->
-        <wallet wallet-owner="'Seller'" asset-balance="40" account-address="123456789"></wallet>
+        <wallet wallet-owner="'Seller'" asset-balance="sellerAccountBalance" account-address="sellerAccountAddress"></wallet>
 
         <!----------------->
       </br>

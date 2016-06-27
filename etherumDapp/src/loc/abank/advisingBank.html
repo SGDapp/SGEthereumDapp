@@ -1,5 +1,11 @@
-<div class=" textAllignCenter">
-    <img src="/assets/images/SGlogo.png" />
+<div class="row">
+    <div class="col-md-3 textAllignCenter">
+      <img src="/assets/images/SGlogo.png" />
+    </div>
+    <div class="col-md-5"></div>
+    <div class="col-md-4">
+        <h2  class="textAllignCenter">Advising Bank</h2>
+    </div>
 </div>
 
 <div>
@@ -22,23 +28,23 @@
                 <div>
 
                 </div>
-                <div ng-show="lcStatus==1">
+                <div ng-show="lcStatus==2">
 
                     <h3 class="textAllignCenter">Verify LC</h3>
                     <div class="reqBoxBlue divCenter" ng-click="verifyLC()">
                         <i class="fa fa-search" aria-hidden="true"></i> Digitally Sign
                         <i ng-show="digitallySign" style="color:black" class="fa fa-key fa-2x" aria-hidden="true"></i>
                     </div>
-                    <br /><br /><br /> <br /><br /><br />
+                    <br /><br /><br /> <br /><br /><br /><br /><br /><br />
                 </div>
 
-                <div ng-show="lcStatus!=1">
+                <div ng-show="lcStatus!=2 ">
 
                     <br /><br /><br /><br /><br /><br /><br />
                     <h3 class="textAllignCenter">{{message}}</h3>
                     <br />
 
-                    <br /><br /><br /> <br /><br /><br /> <br />
+                    <br /><br /><br /> <br /><br /><br /> <br /><br />
                 </div>
 
 
@@ -49,7 +55,7 @@
             <div class="well">
 
                 <!--  ----------->
-                <wallet wallet-owner="'Seller'" asset-balance="40" account-address="123456789"></wallet>
+                <wallet wallet-owner="'Seller'" asset-balance="buyerAccountBalance" account-address="buyerAccountAddress"></wallet>
 
                 <!----------------->
                 </br>

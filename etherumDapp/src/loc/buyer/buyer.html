@@ -30,18 +30,7 @@
         <div class="col-md-4"></div>
       </div>
       <div class="row well">
-        <div >
-          <!--  display message  -->
-          <div ng-if="(lcStatus!=0||lcStatus!=7||lcStatus!=9)">
-            <br />
-            <br />
-            <br /><br />
-            <br /><br />
-            <br />
-            <div class="divCenter textAllignCenter"><h3>{{waitingMessage}}</h3></div>
-            <br /><br /><br /><br /><br /><br /><br /><br />
-          </div>
-        </div >
+
         <div ng-show="lcStatus<=0" >
           <!--   Request to issue lc  -->
           <h3 class="textAllignCenter">Request to Issue Lc</h3>
@@ -80,14 +69,25 @@
           </div>
             <br /><br /><br />  <br /><br /><br />  <br /><br /><br />
         </div>
-
+        <div >
+          <!--  display message  -->
+          <div ng-show="(lcStatus!=0 && lcStatus!=7 && lcStatus!=9)">
+            <br />
+            <br />
+            <br /><br />
+            <br /><br />
+            <br />
+            <div class="divCenter textAllignCenter"><h3>{{waitingMessage}}</h3></div>
+            <br /><br /><br /><br /><br /><br /><br /><br />
+          </div>
+        </div >
       </div>
     </div>
     <div class="col-md-4 ">
       <div class="well">
 
         <!--  ----------->
-        <wallet wallet-owner="'Buyer'" asset-balance="40" account-address="123456789"></wallet>
+        <wallet wallet-owner="'Buyer'" asset-balance="buyerAccountBalance" account-address="buyerAccountAddress"></wallet>
 
         <!----------------->
       </br>

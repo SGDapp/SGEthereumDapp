@@ -33,6 +33,7 @@ var customTransactionLog = function(message,txId,transaction){
 var appRouter = function(app) {
 	require('./features/payements.js')(app,web3NodeA,web3NodeB,baseUrl,customTransactionLog);
 	require('./features/escrow.js')(app,web3NodeB,baseUrl,customTransactionLog);
+	require('./features/letter_of_credit.js')(app,web3NodeB,baseUrl,multer,hashFiles,fs,customTransactionLog);
 	//require('./features/digitizingDocs.js')(app,web3NodeB);
  	//require('./features/letterOfCreditjs')(app,web3NodeB);
 
