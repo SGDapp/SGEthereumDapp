@@ -55,7 +55,7 @@
             <div class="well">
 
                 <!--  ----------->
-                <wallet wallet-owner="'Seller'" asset-balance="sellerAccountBalance" account-address="sellerAccountAddress"></wallet>
+                <wallet wallet-owner="'Buyer'" asset-balance="buyerAccountBalance" account-address="buyerAccountAddress"></wallet>
 
                 <!----------------->
                 </br>

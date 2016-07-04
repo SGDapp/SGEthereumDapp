@@ -9,7 +9,7 @@ Api.letterOfCredit.contractData.get().$promise.then(function(data){
       console.log($scope.lcStatus);
 
       if($scope.lcStatus>6){
-          $scope.message="Goods Delivered."
+          $scope.message="Goods Delivered.";
       }
 
     }, 1000);

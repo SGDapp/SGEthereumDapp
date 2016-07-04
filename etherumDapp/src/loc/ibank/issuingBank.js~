@@ -42,7 +42,7 @@ app.controller('issuingBankCtrl', function($scope,Api,$http,$timeout) {
     });
     Api.letterOfCredit.getAccountBalances.get().$promise.then(function(data){
         console.log(data);
-        $scope.buyerAccountBalance=data[0];
+        $scope.buyerrAccountBalance=data[0];
       },function(error) {
                     console.log('error', error);
     });

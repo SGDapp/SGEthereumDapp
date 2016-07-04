@@ -14,13 +14,13 @@ $scope.buyerAccountAddress="";
 				console.log($scope.lcStatus);
 
 				if($scope.lcStatus>0 && $scope.lcStatus<7){
-					$scope.waitingMessage="Waiting For Goods...";
+					$scope.waitingMessage="Waiting For Goods";
 				}
 				else if ($scope.lcStatus>7 && $scope.lcStatus<9){
-					$scope.waitingMessage="Waiting For Banks Confirmation To Make Payement...";
+					$scope.waitingMessage="Goods were received in good condition";
 				}
 				else if($scope.lcStatus==10){
-					$scope.waitingMessage="Payement Done";
+					$scope.waitingMessage="Payment Done";
 				}
 
       }, 1000);

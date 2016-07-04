@@ -10,15 +10,15 @@ Api.letterOfCredit.contractData.get().$promise.then(function(data){
       console.log($scope.lcStatus);
 
       if($scope.lcStatus<=2){
-          $scope.message="Waiting for LC...";
+          $scope.message="Waiting for LC";
       }
 
       else if($scope.lcStatus>=4 && $scope.lcStatus<10){
-          $scope.message="Goods Dispatched. Waiting for Payment to be made..";
+          $scope.message="Goods Dispatched. Waiting for Payment";
       }
 
       else if($scope.lcStatus==10){
-          $scope.message="Amount Received..";
+          $scope.message="Payment Received";
       }
 
 
