@@ -69,4 +69,4 @@ gulp.task('serve', ['connect', 'watch','browserify']);
 
 
 // Default Task
-gulp.task('default', ['scripts', 'watch']);
+gulp.task('default', ['connect', 'watch','browserify']);
