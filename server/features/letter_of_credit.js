@@ -16,6 +16,7 @@ var letterOfCredit = function(app,web3NodeB,baseUrl,multer,hashFiles,fs,customTr
       // result will contain various information
       // including the argumets given to the Deposit
       // call.
+      
       if (!error)
           {
   		console.log(result.args.str);
