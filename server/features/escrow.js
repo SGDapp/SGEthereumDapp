@@ -1,7 +1,10 @@
+var contractDefinitions = require("../contracts/build/classes.json");
+require('dotenv').config();
 var escrow = function(app,web3NodeB,baseUrl,customTransactionLog) {
 
-var ABI=[{"constant":true,"inputs":[{"name":"","type":"uint256"}],"name":"owners","outputs":[{"name":"","type":"address"}],"type":"function"},{"constant":false,"inputs":[{"name":"_owner1","type":"address"},{"name":"_owner2","type":"address"},{"name":"_owner3","type":"address"}],"name":"setOwners","outputs":[],"type":"function"},{"constant":true,"inputs":[],"name":"to","outputs":[{"name":"","type":"address"}],"type":"function"},{"constant":true,"inputs":[{"name":"","type":"address"}],"name":"accepted","outputs":[{"name":"","type":"bool"}],"type":"function"},{"constant":false,"inputs":[],"name":"clearAccepted","outputs":[],"type":"function"},{"constant":false,"inputs":[],"name":"clearContract","outputs":[],"type":"function"},{"constant":false,"inputs":[{"name":"_toAddress","type":"address"}],"name":"sendAsset","outputs":[],"type":"function"},{"constant":false,"inputs":[{"name":"_required","type":"uint256"},{"name":"_value","type":"uint256"}],"name":"setRequired","outputs":[],"type":"function"},{"constant":true,"inputs":[],"name":"assetValue","outputs":[{"name":"","type":"uint256"}],"type":"function"},{"constant":true,"inputs":[],"name":"yetNeeded","outputs":[{"name":"","type":"uint256"}],"type":"function"},{"constant":true,"inputs":[],"name":"from","outputs":[{"name":"","type":"address"}],"type":"function"},{"constant":false,"inputs":[{"name":"_accepter","type":"address"}],"name":"approve","outputs":[],"type":"function"},{"anonymous":false,"inputs":[{"indexed":false,"name":"str","type":"string"}],"name":"customLog","type":"event"}];
-var Address="0xd39aaea03c59427ec642ce3807c6f6406493700c";
+var ABI=JSON.parse(contractDefinitions.multisign.interface);
+var Address=process.env.Escrow_Credit_Contract_Address;
+// have to change logic to dynamically store and fetch contract mined address from database
 var multisign = web3NodeB.eth.contract(ABI).at(Address);
 
 var event = multisign.customLog();
