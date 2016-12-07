@@ -2,7 +2,7 @@
 
 'use strict';
 
- var gulp = require('gulp'); 
+ var gulp = require('gulp');
 
 // Include Our Plugins
 
@@ -18,7 +18,7 @@ gulp.task('connect', function(){
         port: 3333,
         livereload: true,
         middleware: function (connect, opt) {
-         return [ 
+         return [
                 proxy('/ethereumDapp', {
                     target: 'http://localhost:3344/',
                     ws: true      // <-- set it to 'true' to proxy WebSockets

@@ -5,15 +5,61 @@ var nodeAbalances = [];
 var nodeB_Accounts = web3NodeB.eth.accounts;
 var nodeBbalances=[];
 
+
+
+/**
+ * @swagger
+ * /ethereumDapp/payements/getNodeAAccounts:
+ *   get:
+ *     tags:
+ *       - NodeA Accounts
+ *     description: Returns all accounts in NodeA
+ *     produces:
+ *       - application/json
+ *     responses:
+ *       200:
+ *         description: An array of accounts
+ * 
+ */
+
 app.get(baseUrl+"payements/getNodeAAccounts", function(req, res) {
 	
 	res.send(nodeA_Accounts);
 });
+
+/**
+ * @swagger
+ * /ethereumDapp/payements/getNodeBAccounts:
+ *   get:
+ *     tags:
+ *       - NodeB Accounts
+ *     description: Returns all accounts in NodeB
+ *     produces:
+ *       - application/json
+ *     responses:
+ *       200:
+ *         description: An array of accounts
+ * 
+ */
 app.get(baseUrl+"payements/getNodeBAccounts", function(req, res) {
 	
 	res.send(nodeB_Accounts);
 });
 
+/**
+ * @swagger
+ * /ethereumDapp/payements/getNodeABalances:
+ *   get:
+ *     tags:
+ *       - NodeA Account Balances
+ *     description: Returns balances of all accounts in NodeA
+ *     produces:
+ *       - application/json
+ *     responses:
+ *       200:
+ *         description: An array of balances
+ * 
+ */
 app.get(baseUrl+"payements/getNodeABalances", function(req, res) {
 	
 	for(var i=0;i<nodeA_Accounts.length;i++){
@@ -22,6 +68,21 @@ app.get(baseUrl+"payements/getNodeABalances", function(req, res) {
 
 	res.send(nodeAbalances);
 });
+
+/**
+ * @swagger
+ * /ethereumDapp/payements/getNodeBBalances:
+ *   get:
+ *     tags:
+ *       - NodeB Account Balances
+ *     description: Returns balances of all accounts in NodeB
+ *     produces:
+ *       - application/json
+ *     responses:
+ *       200:
+ *         description: An array of balances
+ * 
+ */
 app.get(baseUrl+"payements/getNodeBBalances", function(req, res) {
 	
 	for(var i=0;i<nodeB_Accounts.length;i++){

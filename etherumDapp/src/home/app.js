@@ -178,7 +178,7 @@ Api.payements.getNodeBAccounts.get().$promise.then(function(data){
     accounts[0]= data[0];
     accounts[1]= data[1];
     accounts[2]= data[2];
-    $scope.nodeB_Accounts = accounts; 
+    $scope.nodeB_Accounts = accounts;
 	},function(error) {
                 console.log('error', error);
 });
